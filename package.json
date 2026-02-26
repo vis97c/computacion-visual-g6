@@ -30,7 +30,7 @@
     "node": ">=20.19.3"
   },
   "workspaces": [
-    "semana_*"
+    "semana_*/threejs"
   ],
   "devDependencies": {
     "@open-xamu-co/eslint-config": "^3.0.1",
