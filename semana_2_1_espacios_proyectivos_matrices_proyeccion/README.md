@@ -1,12 +1,12 @@
-# Taller Transformaciones
+# Taller Espacios Proyectivos Matrices Proyeccion
 
-Victor Saa
+Victor Saa y
 
-Fecha de entrega: 20/02/2026
+Fecha de entrega: 27/02/2026
 
 ## Descripción
 
-Este proyecto es una aplicación para transformar y analizar modelos 3D.
+Este proyecto es una aplicación para evaluar perspectivas y proyecciones.
 
 ## Implementaciónes
 
@@ -29,10 +29,10 @@ pip install -r requirements.txt
 
 ```bash
 # Registrar el kernel para Jupyter
-python -m ipykernel install --user --name semana4-visual --display-name "Python (semana4-visual)"
+python -m ipykernel install --user --name semana2-1-visual --display-name "Python (semana2-1-visual)"
 ```
 
-Abre `main.ipynb`, haz clic en el selector de kernel (arriba a la derecha) y elige **Python (semana4-visual)**.
+Abre `main.ipynb`, haz clic en el selector de kernel (arriba a la derecha) y elige **Python (semana2-1-visual)**.
 
 ### Three.js
 
@@ -56,13 +56,13 @@ IDE, prompts y autocompletado: Antigravity
 
 ## Resultados visuales
 
-![Python](media/python-week-1.4.gif)
-![Three.js](media/threejs-week-1.4.gif)
+![Python](media/NOMBRE.gif)
+![Three.js](media/2-1-threejs.gif)
 
 ## Prompts utilizados
 
-Aca me ayude de Antigravity para crear los frames del gif y la escena del cubo en threejs.
+Se usaron prompts para generar objetos en threejs.
 
 ## Aprendizajes
 
-Siento que aca hice algo de uso de lo que aprendi en algebra lineal, aunque solo fue aplicar las formulas de traslacion, rotacion y escala. Tambien familiarizarme mas con como operar con matrices en python.
+Aca se jugo con la implementacion de distintas perspectivas.
