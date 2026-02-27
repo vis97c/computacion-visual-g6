@@ -2,7 +2,9 @@
 
 Victor Saa y
 
-Fecha de entrega: 27/02/2026
+## Fecha de entrega
+
+`2026-02-27`
 
 ## Descripción
 
@@ -50,6 +52,10 @@ npm install
 npm run dev
 ```
 
+### Processing
+
+Se utilizó processing para implementar la diferencia en la visualización entre el modo perspectiva y el modo ortográfico.
+
 ## IA
 
 IDE, prompts y autocompletado: Antigravity
@@ -58,6 +64,9 @@ IDE, prompts y autocompletado: Antigravity
 
 ![Python](media/NOMBRE.gif)
 ![Three.js](media/2-1-threejs.gif)
+![Modo Perspectiva Processing](media/perspective_mode_processing.gif)
+![Modo Ortográfico Processing](media/ortographic_mode_processing.gif)
+
 
 ## Prompts utilizados
 
