@@ -1,12 +1,12 @@
 # Taller Transformaciones
 
-Victor Saa
+Victor Saa y
 
-Fecha de entrega: 20/02/2026
+Fecha de entrega: 27/02/2026
 
 ## Descripción
 
-Este proyecto es una aplicación para transformar y analizar modelos 3D.
+Este proyecto es una aplicación para emular un sistema solar con transformaciones homogeneas y grupos jerarquicos.
 
 ## Implementaciónes
 
@@ -56,13 +56,13 @@ IDE, prompts y autocompletado: Antigravity
 
 ## Resultados visuales
 
-![Python](media/python-week-1.4.gif)
-![Three.js](media/threejs-week-1.4.gif)
+![Python](media/python-week-2.4.gif)
+![Three.js](media/threejs-week-2.4.gif)
 
 ## Prompts utilizados
 
-Aca me ayude de Antigravity para crear los frames del gif y la escena del cubo en threejs.
+Aca me ayude de Antigravity construir la escena base del sistema solar.
 
 ## Aprendizajes
 
-Siento que aca hice algo de uso de lo que aprendi en algebra lineal, aunque solo fue aplicar las formulas de traslacion, rotacion y escala. Tambien familiarizarme mas con como operar con matrices en python.
+Los grupos jerarquicos son muy utiles para transmitir transformaciones a sus hijos sin complicarse.

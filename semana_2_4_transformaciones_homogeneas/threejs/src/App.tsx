@@ -5,23 +5,6 @@ import { Matrix4, Mesh, Group } from "three";
 
 import "./App.css";
 
-function MatrixDisplay({ matrix }: { matrix: Matrix4 }) {
-	const elements = useMemo(() => matrix.elements, [matrix]);
-
-	return (
-		<div className="matrix-panel">
-			<div className="label">Matriz de Transformación (Mundo)</div>
-			<div className="matrix-grid">
-				{Array.from(elements).map((val, i) => (
-					<span key={i} className="matrix-cell">
-						{val.toFixed(2)}
-					</span>
-				))}
-			</div>
-		</div>
-	);
-}
-
 function SolarSystem({
 	setActiveMatrix,
 }: {
@@ -30,9 +13,10 @@ function SolarSystem({
 }) {
 	const sunRef = useRef<Group>(null!);
 	const earthPivotRef = useRef<Group>(null!);
-	const earthRef = useRef<Mesh>(null!);
+	const earthSystemRef = useRef<Mesh>(null!);
 	const moonPivotRef = useRef<Group>(null!);
 	const moonRef = useRef<Mesh>(null!);
+	const earthRef = useRef<Mesh>(null!);
 
 	useFrame((state) => {
 		const time = state.clock.getElapsedTime();
@@ -40,46 +24,48 @@ function SolarSystem({
 		// matrices temporales para cálculos manuales
 		const mTranslate = new Matrix4();
 		const mRotate = new Matrix4();
-		const mScale = new Matrix4();
 
 		// 1. Transformación del Sol (Rotación sobre sí mismo)
 		sunRef.current.matrixAutoUpdate = false;
-		mRotate.makeRotationY(time * 0.2);
-		sunRef.current.matrix.copy(mRotate);
+		sunRef.current.matrix.copy(mRotate.makeRotationY(time * 0.2));
 		sunRef.current.updateMatrixWorld();
 
-		// 2. Transformación del Pivote de la Tierra (Traslación + Rotación = Orbita)
+		// 2.1. Transformación del Pivote de la Tierra (Traslación + Rotación = Orbita)
 		earthPivotRef.current.matrixAutoUpdate = false;
-		mRotate.makeRotationY(time * 0.1);
-		earthPivotRef.current.matrix.copy(mRotate);
+		earthPivotRef.current.matrix.copy(mRotate.makeRotationY(time * 0.1));
 		earthPivotRef.current.updateMatrixWorld();
 
-		// 3. Transformación de la Tierra (Posición local respecto al Sol)
+		// 2.2. Transformación de la Tierra (Posición local respecto al Sol)
+		earthSystemRef.current.matrixAutoUpdate = false;
+		// Radio de órbita, composición de matrices
+		earthSystemRef.current.matrix
+			.copy(mTranslate.makeTranslation(5, 0, 0)) // Radio de órbita
+			.multiply(mRotate.makeRotationY(time * 2)); // Rotación sobre su propio eje
+		earthSystemRef.current.updateMatrixWorld();
+
+		// 2.3. Rotación de la Tierra (Local)
 		earthRef.current.matrixAutoUpdate = false;
-		mTranslate.makeTranslation(5, 0, 0); // Radio de órbita
-		mRotate.makeRotationY(time * 2); // Rotación sobre su propio eje
-		// Composición: Traslación * Rotación
-		earthRef.current.matrix.copy(mTranslate).multiply(mRotate);
+		earthRef.current.matrix.copy(mRotate.makeRotationY(time * 0.7));
 		earthRef.current.updateMatrixWorld();
 
-		// 4. Transformación del Pivote de la Luna (Sigue a la Tierra)
+		// 3.1. Transformación del Pivote de la Luna (Sigue a la Tierra)
+		// La luna tiene bloqueo de marea respecto a la Tierra
 		moonPivotRef.current.matrixAutoUpdate = false;
-		mRotate.makeRotationY(time * 2);
-		moonPivotRef.current.matrix.copy(mRotate);
+		moonPivotRef.current.matrix.copy(mRotate.makeRotationY(time * 0.1));
 		moonPivotRef.current.updateMatrixWorld();
 
-		// 5. Transformación de la Luna (Traslación local respecto a la Tierra)
+		// 3.2. Transformación de la Luna (Traslación local respecto a la Tierra)
 		moonRef.current.matrixAutoUpdate = false;
-		mTranslate.makeTranslation(1.5, 0, 0); // Distancia a la Tierra
-		mScale.makeScale(0.3, 0.3, 0.3); // Escala manual
-		// Composición: T * S
-		moonRef.current.matrix.copy(mTranslate).multiply(mScale);
+		// Radio de órbita, composición de matrices
+		moonRef.current.matrix
+			.copy(mTranslate.makeTranslation(1.5, 0, 0)) // Distancia a la Tierra
+			.multiply(mRotate.makeRotationY(time * 0.1)); // Rotación sobre su propio eje, bloqueo de marea
 		moonRef.current.updateMatrixWorld();
 
-		// Actualizar matriz visualizada (Mundo de la Tierra)
+		// Actualizar matriz visualizada (Mundo de la Luna)
 		const worldMatrix = new Matrix4();
 
-		earthRef.current.applyMatrix4(worldMatrix);
+		moonRef.current.applyMatrix4(worldMatrix);
 		setActiveMatrix(worldMatrix.clone());
 	});
 
@@ -90,35 +76,40 @@ function SolarSystem({
 				<sphereGeometry args={[1.5, 32, 32]} />
 				<meshStandardMaterial color="#fbbf24" emissive="#f59e0b" emissiveIntensity={2} />
 			</mesh>
-			<axesHelper args={[3]} />
 
 			{/* Sistema Tierra (Hijo del Sol) */}
 			<group ref={earthPivotRef}>
-				<group ref={earthRef}>
+				<group ref={earthSystemRef}>
 					{/* Tierra */}
-					<mesh>
-						<sphereGeometry args={[0.5, 32, 32]} />
-						<meshStandardMaterial color="#3b82f6" roughness={0.3} />
-					</mesh>
-					<axesHelper args={[1.5]} />
+					<group ref={earthRef}>
+						<mesh>
+							<sphereGeometry args={[0.5, 32, 32]} />
+							<meshStandardMaterial color="#3b82f6" roughness={0.3} />
+						</mesh>
+						<axesHelper args={[1.5]} />
+					</group>
 
 					{/* Sistema Luna (Hijo de la Tierra) */}
 					<group ref={moonPivotRef}>
-						<mesh ref={moonRef}>
-							{/* Luna */}
-							<sphereGeometry args={[0.5, 16, 16]} />
-							<meshStandardMaterial color="#94a3b8" />
-						</mesh>
-						<axesHelper args={[0.8]} />
+						<group ref={moonRef}>
+							<mesh>
+								{/* Luna */}
+								<sphereGeometry args={[0.25, 16, 16]} />
+								<meshStandardMaterial color="#94a3b8" />
+							</mesh>
+							<axesHelper args={[0.5]} />
+						</group>
 					</group>
 				</group>
 			</group>
+			<axesHelper args={[3]} />
 		</group>
 	);
 }
 
 function App() {
 	const [activeMatrix, setActiveMatrix] = useState<Matrix4>(new Matrix4());
+	const elements = useMemo(() => activeMatrix.elements, [activeMatrix]);
 
 	return (
 		<main id="container">
@@ -130,14 +121,7 @@ function App() {
 			<section id="canvas-container">
 				<Canvas camera={{ position: [8, 8, 8], fov: 45 }}>
 					<Suspense fallback={null}>
-						<ambientLight intensity={0.4} />
 						<pointLight position={[0, 0, 0]} intensity={20} color="#fff176" />
-						<spotLight
-							position={[10, 10, 10]}
-							angle={0.15}
-							penumbra={1}
-							intensity={1}
-						/>
 
 						<SolarSystem
 							activeMatrix={activeMatrix}
@@ -149,7 +133,16 @@ function App() {
 						<gridHelper args={[20, 20, 0x333333, 0x111111]} position={[0, -2, 0]} />
 					</Suspense>
 				</Canvas>
-				<MatrixDisplay matrix={activeMatrix} />
+				<div className="matrix-panel">
+					<div className="label">Matriz de Transformación (Mundo)</div>
+					<div className="matrix-grid">
+						{Array.from(elements).map((val, i) => (
+							<span key={i} className="matrix-cell">
+								{val.toFixed(2)}
+							</span>
+						))}
+					</div>
+				</div>
 			</section>
 
 			<ul id="canvas-options">
