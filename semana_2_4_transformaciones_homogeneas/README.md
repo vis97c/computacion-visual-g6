@@ -1,54 +1,28 @@
 # Taller Transformaciones
 
-Victor Saa y
+Victor Saa
 
 Fecha de entrega: 27/02/2026
 
 ## Descripción
 
-Este proyecto es una aplicación para emular un sistema solar con transformaciones homogeneas y grupos jerarquicos.
+En este taller se implementaron transformaciones homogéneas en 2D y 3D utilizando matrices 3x3 y 4x4 para modelar traslaciones, rotaciones, escalamiento y reflexiones. Se estudió la composición de transformaciones y se demostró que la multiplicación de matrices no es conmutativa.
+
+Además, se trabajó el concepto de cambio de base entre sistemas de referencia y el cálculo de transformaciones inversas para deshacer transformaciones. Finalmente, se aplicaron estos conceptos en la modelación de un brazo robótico mediante cinemática directa (forward kinematics), visualizando la cadena cinemática y los distintos marcos de coordenadas.
 
 ## Implementaciónes
 
 ### Python
 
-Se utilizó jupyter notebook para la implementación. Se carga el objeto y se extrae la geometría, vertices y caras. Se utiliza matplotlib para la visualización.
+La implementación en Python se desarrolló en un notebook utilizando NumPy para el manejo de matrices y Matplotlib para la visualización en 2D y 3D.
 
-```bash
-# Crear el entorno virtual
-python -m venv .venv
+Primero, se representaron puntos en coordenadas homogéneas agregando una componente adicional igual a 1, lo que permitió trabajar con transformaciones afines mediante multiplicación matricial. Se implementaron matrices 3x3 para transformaciones en 2D (traslación, rotación, escalamiento y reflexión) y matrices 4x4 para transformaciones en 3D (traslaciones, rotaciones respecto a los ejes X, Y y Z, y escalamiento).
 
-# Activar el entorno virtual
-.venv\Scripts\activate
+Posteriormente, se realizó la composición de transformaciones, demostrando que el orden de multiplicación de matrices afecta el resultado (no conmutatividad). También se verificó que aplicar una transformación compuesta es equivalente a aplicar las transformaciones de manera secuencial.
 
-# Instalar dependencias
-pip install -r requirements.txt
-```
+En 3D, se modeló un cubo y se aplicaron transformaciones compuestas para visualizar los efectos espaciales. Se implementaron transformaciones inversas y se verificó algebraicamente que T⋅T^(−1)=I, demostrando cómo “deshacer” una transformación.
 
-### Jupyter en el editor (VS Code, Antigravity, etc.)
-
-```bash
-# Registrar el kernel para Jupyter
-python -m ipykernel install --user --name semana4-visual --display-name "Python (semana4-visual)"
-```
-
-Abre `main.ipynb`, haz clic en el selector de kernel (arriba a la derecha) y elige **Python (semana4-visual)**.
-
-### Three.js
-
-Se utilizó three.js para la implementación. Se carga el objeto y se extrae la geometría, vertices y caras. Se utiliza three fiber para la visualización.
-
-```bash
-cd threejs
-
-# Con yarn
-yarn install
-yarn dev
-
-# Con npm
-npm install
-npm run dev
-```
+Finalmente, se aplicaron estos conceptos en robótica, modelando un brazo robótico planar de dos grados de libertad. Se calcularon las matrices de transformación encadenadas para obtener la cinemática directa (forward kinematics), transformando coordenadas desde el espacio articular al espacio del mundo y visualizando la cadena cinemática junto con sus sistemas de referencia.
 
 ## IA
 
@@ -56,7 +30,8 @@ IDE, prompts y autocompletado: Antigravity
 
 ## Resultados visuales
 
-![Python](media/python-week-2.4.gif)
+![Orden de transformación en Python](media/python_transformation_order.png)
+![Transformación 3d en Python](media/python_transformation_3d.png)
 ![Three.js](media/threejs-week-2.4.gif)
 
 ## Prompts utilizados
@@ -65,4 +40,32 @@ Aca me ayude de Antigravity construir la escena base del sistema solar.
 
 ## Aprendizajes
 
-Los grupos jerarquicos son muy utiles para transmitir transformaciones a sus hijos sin complicarse.
+Durante el desarrollo del taller comprendí la importancia de las coordenadas homogéneas para unificar rotaciones y traslaciones en una sola operación matricial. Entendí que el orden en la multiplicación de matrices es fundamental, ya que las transformaciones no son conmutativas. Además, reforcé el concepto de cambio de base entre sistemas de referencia y su aplicación en robótica mediante la cinemática directa, visualizando cómo las transformaciones encadenadas determinan la posición final de un efector.
+
+## Contribuciones grupales (si aplica)
+
+(contribuciones)
+
+---
+
+## Estructura del proyecto
+
+```
+semana_2_4_transformaciones_homogeneas/
+├── unity/
+├── threejs/
+├── media/ # Imágenes, videos, GIFs de resultados
+└── README.md
+```
+
+---
+
+## Referencias
+
+Lista las fuentes, tutoriales, documentación o papers consultados durante el desarrollo:
+
+- Documentación oficial de Unity: https://docs.unity3d.com/Manual/
+- Tutorial de React Three Fiber: https://docs.pmnd.rs/react-three-fiber/
+- Leva (React UI controls): https://leva.pmnd.rs/
+
+---
