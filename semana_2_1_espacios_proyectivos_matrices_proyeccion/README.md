@@ -1,6 +1,6 @@
 # Taller Espacios Proyectivos Matrices Proyeccion
 
-Victor Saa y Diego Romero
+Victor Saa, Samuel Vargas y Diego Romero
 
 ## Fecha de entrega
 
@@ -157,7 +157,7 @@ Aca se jugo con la implementacion de distintas perspectivas.
 
 ## Contribuciones grupales (si aplica)
 
-(Contribuciones)
+Samuel Vargas: Desarrollo en Processing
 
 ---
 

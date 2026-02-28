@@ -1,6 +1,6 @@
 # Taller Transformaciones
 
-Victor Saa
+Victor Saa y Samuel Vargas
 
 Fecha de entrega: 27/02/2026
 
@@ -86,7 +86,7 @@ Durante el desarrollo del taller comprendí la importancia de las coordenadas ho
 
 ## Contribuciones grupales (si aplica)
 
-(contribuciones)
+Samuel Vargas: Desarrollo en Python
 
 ---
 
