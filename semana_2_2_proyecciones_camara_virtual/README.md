@@ -2,7 +2,7 @@
 
 ## Nombre del estudiante
 
-Victor Saa y Juan Esteban Santacruz
+Victor Saa, Diego Romero y Juan Esteban Santacruz
 
 ## Fecha de entrega
 
@@ -110,18 +110,82 @@ export default function Scene({ isPerspective }: Props) {
 
 ### Unity
 
+Se implementó una escena en Unity con 6 objetos (cubos, esferas y un plano) distribuidos a distintas profundidades en el eje Z, con materiales de colores diferenciados para facilitar la identificación visual de cada objeto según su distancia a la cámara.
+
+La escena incluye un script C# (`ProyeccionCamaraController`) adjunto a un `GameController` vacío que controla en tiempo real los parámetros de la `Main Camera`. El script permite alternar entre proyección perspectiva y ortográfica mediante un botón, y ajustar los parámetros de cada modo con sliders:
+
+- **Modo perspectiva**: slider de Field of View (FOV) entre 10° y 120°. A mayor FOV se obtiene un efecto gran angular con mayor distorsión; a menor FOV los objetos se comprimen como un teleobjetivo.
+- **Modo ortográfico**: slider de Orthographic Size entre 1 y 20, que controla el zoom sin alterar las proporciones ni producir efecto de profundidad.
+
+Al cambiar de modo, la matriz de proyección actual se imprime en consola mediante `camera.projectionMatrix`, mostrando la diferencia matemática entre ambos tipos de proyección. La matriz también se muestra en pantalla en tiempo real a través de un texto TMP.
+
+La UI se construyó con el sistema Canvas de Unity usando TextMeshPro, con textos de valores actualizados cada frame para reflejar el estado actual de la cámara.
+
+```csharp
+public void CambiarModo()
+{
+    esPerspectiva = !esPerspectiva;
+
+    Debug.Log("════════════════════════════════════════");
+    Debug.Log($"Modo: {(esPerspectiva ? "PERSPECTIVA" : "ORTOGRÁFICA")}");
+    Debug.Log("Matriz de proyección:");
+    Debug.Log(camara.projectionMatrix);
+    Debug.Log("════════════════════════════════════════");
+}
+```
+
+```csharp
+void Update()
+{
+    LeerSliders();
+
+    if (esPerspectiva)
+    {
+        camara.orthographic = false;
+        camara.fieldOfView  = campoPVision;
+    }
+    else
+    {
+        camara.orthographic     = true;
+        camara.orthographicSize = tamanoOrtografico;
+    }
+
+    ActualizarUI();
+}
+```
+
 ## IA
 
 IDE, prompts y autocompletado: Antigravity
 
 ## Resultados visuales
 
-![Python](media/python-week-1.4.gif)
+### Three.js
+
 ![Three.js](media/threejs-week-1.4.gif)
+
+### Unity
+
+**Efecto del FOV en modo perspectiva — objetos se deforman con el ángulo de visión**
+
+![FOV animation](media/unity_FOV_animation.gif)
+
+**Modo ortográfico — los objetos mantienen proporciones sin importar la distancia**
+
+![Orthogonal animation](media/unity_orthogonal_animation.gif)
+
+**Panel de controles UI — sliders y botón de cambio de modo**
+
+![Unity UI](media/unity_UI.png)
 
 ## Prompts utilizados
 
 Aca me ayude de Antigravity para crear los frames del gif y la escena del cubo en threejs.
+
+Para la implementación en Unity se utilizó IA generativa (Claude) con los siguientes prompts principales:
+- *"Crear una escena con cubos, esferas y un plano distribuidos a distintas profundidades, con un script C# para cambiar entre proyección perspectiva y ortográfica desde la UI"*
+- *"Mostrar la matriz de proyección en pantalla en tiempo real usando TextMeshPro"*
+- *"El script usa el componente Text antiguo pero Unity tiene TextMeshPro"* → llevó a actualizar el script para usar `TMP_Text` en lugar de `Text`.
 
 ## Aprendizajes
 
@@ -151,3 +215,4 @@ Lista las fuentes, tutoriales, documentación o papers consultados durante el de
 
 - Documentación oficial de NumPy: https://numpy.org/doc/
 - Tutorial de React Three Fiber: https://docs.pmnd.rs/react-three-fiber/
+- Unity Manual — Cameras: https://docs.unity3d.com/Manual/CamerasOverview.html
