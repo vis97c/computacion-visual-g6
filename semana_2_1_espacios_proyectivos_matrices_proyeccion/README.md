@@ -77,7 +77,7 @@ Se utilizó processing para implementar la diferencia en la visualización entre
 ```java
 void draw() {
   background(30);
-  
+
   if (usarPerspectiva) {
     float fov = PI/3.0;
     float aspect = float(width)/float(height);
@@ -87,7 +87,7 @@ void draw() {
   }
 
   lights();
-  
+
   translate(width/2, height/2);
   rotateY(angulo);
   angulo += 0.01;
@@ -141,15 +141,15 @@ IDE, prompts y autocompletado: Antigravity
 ![Modo Perspectiva Processing](media/perspective_mode_processing.gif)
 ![Modo Ortográfico Processing](media/ortographic_mode_processing.gif)
 
-
 ## Prompts utilizados
 
 Se usaron prompts para generar objetos en threejs.
 
 Para la implementación en Python se utilizó IA generativa (Claude) con los siguientes prompts principales:
-- *"Implementar matrices de proyección ortogonal y perspectiva sobre una casa 3D con numpy y matplotlib, con widget interactivo para variar la distancia focal"*
-- *"La proyección perspectiva se ve igual en todos los paneles, hacer que la diferencia sea visualmente clara mostrando tres casas a distintas profundidades"*
-- *"Los sliders del widget dejan puntos estáticos en la vista perspectiva al rotar la figura"* → llevó a implementar el desplazamiento dinámico en Z para garantizar vértices siempre frente a la cámara.
+
+- _"Implementar matrices de proyección ortogonal y perspectiva sobre una casa 3D con numpy y matplotlib, con widget interactivo para variar la distancia focal"_
+- _"La proyección perspectiva se ve igual en todos los paneles, hacer que la diferencia sea visualmente clara mostrando tres casas a distintas profundidades"_
+- _"Los sliders del widget dejan puntos estáticos en la vista perspectiva al rotar la figura"_ → llevó a implementar el desplazamiento dinámico en Z para garantizar vértices siempre frente a la cámara.
 
 ## Aprendizajes
 
@@ -158,8 +158,8 @@ Aca se jugo con la implementacion de distintas perspectivas.
 ## Contribuciones grupales (si aplica)
 
 Samuel Vargas: Desarrollo en Processing
-
----
+Diego Romero: Desarrollo python
+Victor Saa: Desarrollo Threejs
 
 ## Estructura del proyecto
 

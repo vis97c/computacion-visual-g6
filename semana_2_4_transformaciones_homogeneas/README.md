@@ -87,8 +87,7 @@ Durante el desarrollo del taller comprendí la importancia de las coordenadas ho
 ## Contribuciones grupales (si aplica)
 
 Samuel Vargas: Desarrollo en Python
-
----
+Victo Saa: Desarrollo Threejs
 
 ## Estructura del proyecto
 
