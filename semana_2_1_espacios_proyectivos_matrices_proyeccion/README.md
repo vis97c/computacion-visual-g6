@@ -1,6 +1,6 @@
 # Taller Espacios Proyectivos Matrices Proyeccion
 
-Victor Saa y
+Victor Saa y Diego Romero
 
 ## Fecha de entrega
 
@@ -14,17 +14,35 @@ Este proyecto es una aplicación para evaluar perspectivas y proyecciones.
 
 ### Python
 
-Se utilizó jupyter notebook para la implementación. Se carga el objeto y se extrae la geometría, vertices y caras. Se utiliza matplotlib para la visualización.
+Se implementó un notebook en Google Colab para visualizar y comparar proyecciones ortogonal y perspectiva sobre una figura 3D (casa). Se representaron los puntos con coordenadas homogéneas y se implementaron manualmente las matrices de proyección usando `numpy`. La visualización se realizó con `matplotlib`, incluyendo un widget interactivo con `ipywidgets` para explorar el efecto de la distancia focal en tiempo real.
+
+La figura elegida fue una casa 3D (10 vértices, 17 aristas) por combinar superficies planas y una estructura angular en el techo, haciendo muy visible la diferencia entre tipos de proyección.
+
+Las matrices implementadas fueron:
+
+- **Proyección ortogonal**: descarta la coordenada Z, los objetos mantienen el mismo tamaño sin importar la distancia.
+- **Proyección perspectiva**: divide X e Y por Z escalado por la distancia focal `d`. A menor `d` mayor distorsión (gran angular); a mayor `d` converge hacia la ortogonal (teleobjetivo).
+
+```python
+def proyectar_perspectiva(puntos, d=1.0):
+    P = np.array([
+        [1, 0,   0, 0],
+        [0, 1,   0, 0],
+        [0, 0,   1, 0],
+        [0, 0, 1/d, 0]
+    ])
+    puntos_hom = np.vstack((puntos, np.ones((1, puntos.shape[1]))))
+    proy = P @ puntos_hom
+    proy /= proy[-1, :]
+    return proy[:2, :]
+```
+
+Para que la diferencia perspectiva fuera visible, la figura se rota y se desplaza dinámicamente en Z antes de proyectar, garantizando que todos los vértices queden frente a la cámara con Z positivo.
 
 ```bash
-# Crear el entorno virtual
-python -m venv .venv
-
-# Activar el entorno virtual
-.venv\Scripts\activate
-
-# Instalar dependencias
-pip install -r requirements.txt
+# Ejecutar en Google Colab — no requiere entorno local
+# Las dependencias se instalan en la primera celda del notebook
+!pip install numpy matplotlib ipywidgets --quiet
 ```
 
 ### Jupyter en el editor (VS Code, Antigravity, etc.)
@@ -103,7 +121,22 @@ IDE, prompts y autocompletado: Antigravity
 
 ## Resultados visuales
 
-![Python](media/NOMBRE.gif)
+### Python
+
+**Comparación ortogonal vs. perspectiva con rotación aplicada**
+
+![Comparación perspectivas](media/python_colab_comparacion_perspectivas.png)
+
+**Efecto de la distancia focal sobre la proyección perspectiva**
+
+![Distancia focal](media/python_colab_distancia_focal.png)
+
+**Tres casas a distintas profundidades — efecto de achicamiento con la distancia**
+
+![Profundidad](media/python_colab_profundidad.png)
+
+### Otros entornos
+
 ![Three.js](media/2-1-threejs.gif)
 ![Modo Perspectiva Processing](media/perspective_mode_processing.gif)
 ![Modo Ortográfico Processing](media/ortographic_mode_processing.gif)
@@ -112,6 +145,11 @@ IDE, prompts y autocompletado: Antigravity
 ## Prompts utilizados
 
 Se usaron prompts para generar objetos en threejs.
+
+Para la implementación en Python se utilizó IA generativa (Claude) con los siguientes prompts principales:
+- *"Implementar matrices de proyección ortogonal y perspectiva sobre una casa 3D con numpy y matplotlib, con widget interactivo para variar la distancia focal"*
+- *"La proyección perspectiva se ve igual en todos los paneles, hacer que la diferencia sea visualmente clara mostrando tres casas a distintas profundidades"*
+- *"Los sliders del widget dejan puntos estáticos en la vista perspectiva al rotar la figura"* → llevó a implementar el desplazamiento dinámico en Z para garantizar vértices siempre frente a la cámara.
 
 ## Aprendizajes
 
@@ -143,4 +181,3 @@ Lista las fuentes, tutoriales, documentación o papers consultados durante el de
 - Documentación oficial de NumPy: https://numpy.org/doc/
 - Tutorial de React Three Fiber: https://docs.pmnd.rs/react-three-fiber/
 - Documentación oficial de Processing: https://processing.org/reference/
-
