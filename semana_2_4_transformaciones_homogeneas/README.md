@@ -24,6 +24,48 @@ En 3D, se modeló un cubo y se aplicaron transformaciones compuestas para visual
 
 Finalmente, se aplicaron estos conceptos en robótica, modelando un brazo robótico planar de dos grados de libertad. Se calcularon las matrices de transformación encadenadas para obtener la cinemática directa (forward kinematics), transformando coordenadas desde el espacio articular al espacio del mundo y visualizando la cadena cinemática junto con sus sistemas de referencia.
 
+```python
+def translation_matrix_3d(tx, ty, tz):
+    return np.array([
+        [1, 0, 0, tx],
+        [0, 1, 0, ty],
+        [0, 0, 1, tz],
+        [0, 0, 0, 1]
+    ])
+
+def scaling_matrix_3d(sx, sy, sz):
+    return np.array([
+        [sx, 0, 0, 0],
+        [0, sy, 0, 0],
+        [0, 0, sz, 0],
+        [0, 0, 0, 1]
+    ])
+
+def rotation_x(theta):
+    return np.array([
+        [1, 0, 0, 0],
+        [0, np.cos(theta), -np.sin(theta), 0],
+        [0, np.sin(theta),  np.cos(theta), 0],
+        [0, 0, 0, 1]
+    ])
+
+def rotation_y(theta):
+    return np.array([
+        [ np.cos(theta), 0, np.sin(theta), 0],
+        [0, 1, 0, 0],
+        [-np.sin(theta), 0, np.cos(theta), 0],
+        [0, 0, 0, 1]
+    ])
+
+def rotation_z(theta):
+    return np.array([
+        [np.cos(theta), -np.sin(theta), 0, 0],
+        [np.sin(theta),  np.cos(theta), 0, 0],
+        [0, 0, 1, 0],
+        [0, 0, 0, 1]
+    ])
+```
+
 ## IA
 
 IDE, prompts y autocompletado: Antigravity
