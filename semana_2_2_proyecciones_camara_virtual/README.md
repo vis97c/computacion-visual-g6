@@ -2,7 +2,7 @@
 
 ## Nombre del estudiante
 
-Victor Saa, Diego Romero y Juan Esteban Santacruz
+Diego Romero y Juan Esteban Santacruz
 
 ## Fecha de entrega
 
