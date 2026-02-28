@@ -116,3 +116,31 @@ Se usaron prompts para generar objetos en threejs.
 ## Aprendizajes
 
 Aca se jugo con la implementacion de distintas perspectivas.
+
+## Contribuciones grupales (si aplica)
+
+(Contribuciones)
+
+---
+
+## Estructura del proyecto
+
+```
+semana_2_1_espacios_proyectivos_matrices_proyeccion/
+    ├── python/
+    ├── processing/
+    ├── threejs/
+    ├── media/
+    └── README.md
+```
+
+---
+
+## Referencias
+
+Lista las fuentes, tutoriales, documentación o papers consultados durante el desarrollo:
+
+- Documentación oficial de NumPy: https://numpy.org/doc/
+- Tutorial de React Three Fiber: https://docs.pmnd.rs/react-three-fiber/
+- Documentación oficial de Processing: https://processing.org/reference/
+
