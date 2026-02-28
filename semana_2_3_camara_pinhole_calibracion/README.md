@@ -1,26 +1,20 @@
-# Taller Transformaciones
+# Taller Camara Pinhole
 
-Victor Saa
+Samuel Vargas y Álvaro Romero
 
-Fecha de entrega: 20/02/2026
+Fecha de entrega: 27/02/2026
 
 ## Descripción
 
-Este proyecto es una aplicación para transformar y analizar modelos 3D.
+Este proyecto se recrea una camara por medio de proyecciones de 3D -> 2D. Y se recrean las matrices necesarias para proyecciones más fieles por medio de auto calibración por medio de imágenes de checkerboard.
 
 ## Implementaciónes
 
 ### Python
 
-Se utilizó jupyter notebook para la implementación. Se carga el objeto y se extrae la geometría, vertices y caras. Se utiliza matplotlib para la visualización.
+Se utilizó jupyter notebook para la implementación. Se encuentra el desarrollo punto por punto separado por titulos de markdown.
 
 ```bash
-# Crear el entorno virtual
-python -m venv .venv
-
-# Activar el entorno virtual
-.venv\Scripts\activate
-
 # Instalar dependencias
 pip install -r requirements.txt
 ```
@@ -56,13 +50,12 @@ IDE, prompts y autocompletado: Antigravity
 
 ## Resultados visuales
 
-![Python](media/python-week-1.4.gif)
-![Three.js](media/threejs-week-1.4.gif)
+Por simplicidad y documentación se encuentra en el notebook los resultados de cada punto
 
 ## Prompts utilizados
 
-Aca me ayude de Antigravity para crear los frames del gif y la escena del cubo en threejs.
+Ayudas para entender las matrices a usar y como declararlas correctamente.
 
 ## Aprendizajes
 
-Siento que aca hice algo de uso de lo que aprendi en algebra lineal, aunque solo fue aplicar las formulas de traslacion, rotacion y escala. Tambien familiarizarme mas con como operar con matrices en python.
+Un entendimiento profundo a lo necesario para proyectar objetos en 3D a la pantalla y lo que significan cada una de las operaciones necesarias para proyectar.
