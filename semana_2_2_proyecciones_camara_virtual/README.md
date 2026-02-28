@@ -126,3 +126,28 @@ Aca me ayude de Antigravity para crear los frames del gif y la escena del cubo e
 ## Aprendizajes
 
 Siento que aca hice algo de uso de lo que aprendi en algebra lineal, aunque solo fue aplicar las formulas de traslacion, rotacion y escala. Tambien familiarizarme mas con como operar con matrices en python.
+
+## Contribuciones grupales (si aplica)
+
+(Contribuciones)
+
+---
+
+## Estructura del proyecto
+
+```
+semana_2_2_proyecciones_camara_virtual/
+    ├── unity/
+    ├── threejs/
+    ├── media/
+    └── README.md
+```
+
+---
+
+## Referencias
+
+Lista las fuentes, tutoriales, documentación o papers consultados durante el desarrollo:
+
+- Documentación oficial de NumPy: https://numpy.org/doc/
+- Tutorial de React Three Fiber: https://docs.pmnd.rs/react-three-fiber/
