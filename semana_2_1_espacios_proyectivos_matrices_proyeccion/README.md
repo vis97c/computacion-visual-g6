@@ -56,6 +56,47 @@ npm run dev
 
 Se utilizó processing para implementar la diferencia en la visualización entre el modo perspectiva y el modo ortográfico.
 
+```java
+void draw() {
+  background(30);
+  
+  if (usarPerspectiva) {
+    float fov = PI/3.0;
+    float aspect = float(width)/float(height);
+    perspective(fov, aspect, 1, 1000);
+  } else {
+    ortho(-width/2, width/2, -height/2, height/2, 1, 1000);
+  }
+
+  lights();
+  
+  translate(width/2, height/2);
+  rotateY(angulo);
+  angulo += 0.01;
+
+  // Cubo cercano
+  pushMatrix();
+  translate(-150, 0, -100);
+  fill(255, 0, 0);
+  box(80);
+  popMatrix();
+
+  // Cubo medio
+  pushMatrix();
+  translate(0, 0, -300);
+  fill(0, 255, 0);
+  box(80);
+  popMatrix();
+
+  // Cubo lejano
+  pushMatrix();
+  translate(150, 0, -500);
+  fill(0, 0, 255);
+  box(80);
+  popMatrix();
+}
+```
+
 ## IA
 
 IDE, prompts y autocompletado: Antigravity
@@ -75,3 +116,31 @@ Se usaron prompts para generar objetos en threejs.
 ## Aprendizajes
 
 Aca se jugo con la implementacion de distintas perspectivas.
+
+## Contribuciones grupales (si aplica)
+
+(Contribuciones)
+
+---
+
+## Estructura del proyecto
+
+```
+semana_2_1_espacios_proyectivos_matrices_proyeccion/
+    ├── python/
+    ├── processing/
+    ├── threejs/
+    ├── media/
+    └── README.md
+```
+
+---
+
+## Referencias
+
+Lista las fuentes, tutoriales, documentación o papers consultados durante el desarrollo:
+
+- Documentación oficial de NumPy: https://numpy.org/doc/
+- Tutorial de React Three Fiber: https://docs.pmnd.rs/react-three-fiber/
+- Documentación oficial de Processing: https://processing.org/reference/
+
