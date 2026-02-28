@@ -2,7 +2,7 @@
 
 ## Nombre del estudiante
 
-Victor Saa
+Victor Saa y Juan Esteban Santacruz
 
 ## Fecha de entrega
 
