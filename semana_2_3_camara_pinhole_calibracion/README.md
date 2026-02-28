@@ -46,11 +46,29 @@ npm run dev
 
 ## IA
 
-IDE, prompts y autocompletado: Antigravity
+IDE, prompts y autocompletado: VScode
 
 ## Resultados visuales
 
-Por simplicidad y documentación se encuentra en el notebook los resultados de cada punto
+### Proyecciones con diferente distancia focal
+
+![Proyección f=1](media/proy_f1.png)
+![Proyección f=2](media/proy_f2.png)
+
+### Proyecciones con distintos valores intrinsecos
+
+![Zoom](media/p2_1.png)
+![Deformación](media/p2_2.png)
+![Desplazamiento](media/p2_3.png)
+
+### Proyecciones con distintos valores extrinsecos
+
+![Rotación](media/p3_1.png)
+![Traslación cámara](media/p3_2.png)
+
+### Corrección de distorción
+
+![Comparación distorción](media/correcion.png)
 
 ## Prompts utilizados
 
